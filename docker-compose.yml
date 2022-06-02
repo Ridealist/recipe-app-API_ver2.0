@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      # . 은 current directory를 사용하겠다는 뜻
+      context: .
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000"
+    volumes:
+      # app directory를 mapping하여 container - project를 연결시킴(한쪽이 수정되면 다른쪽에도 자동 반영됨)
+      - ./app:/app
+    command:
+      sh -c "python manage.py runserver 0.0.0.0:8000"
